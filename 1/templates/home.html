@@ -1,0 +1,455 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <style>
+        /* Asosiy sozlamalar */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #343a40;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+        tr:hover {
+            background-color: #f1f3f5;
+        }
+        .btn {
+            text-decoration: none;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+        }
+        .btn-warning {
+            background-color: #ffc107;
+        }
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+        .btn-danger {
+            background-color: #dc3545;
+        }
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+        .text-center {
+            text-align: center;
+        }
+    </style>
+
+
+
+
+
+</head>
+<body>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+
+
+    <!-- Kategoriyalar ro'yxati jadvali -->
+    <div class="container mt-5">
+        <h1 class="mb-4">Category List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for category in categoryes %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.name }}</td>
+
+                    <td class="text-center">
+                        <a href="{% url 'update_category' category.id %}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{% url 'delete_category' category.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this category?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+  
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Boshmenu List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Image</th>
+                    <th>Ish vaqti</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for boshmenu in boshmenus %}
+                <tr>
+                    <td>{{ boshmenu.id }}</td>
+                    <td>{{ boshmenu.name }}</td>
+                    <td>{{ boshmenu.image}}</td>
+                    <td>{{ boshmenu.ishvaqti}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'update_boshmenu' boshmenu.id %}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{% url 'delete_boshmenu' boshmenu.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this menu?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Product List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Image</th>
+                    <th>Price</th>
+                    <th>Category</th>
+                    <th>Is_food_of_day</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in productes %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.image}}</td>
+                    <td>{{ product.price}}</td>
+                    <td>{{ product.category}}</td>
+                    <td>{{ product.is_food_of_day}}</td>
+                    
+                    <td class="text-center">
+                        <a href="{% url 'update_products' products.id %}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{% url 'delete_products' products.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this menu?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+       
+    </div>
+
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Book a table</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Phone</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>People</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bookatable in bookatablees %}
+                <tr>
+                    <td>{{ bookatable.id }}</td>
+                    <td>{{ bookatable.name }}</td>
+                    <td>{{ bookatable.phone }}</td>
+                    <td>{{ bookatable.date }}</td>
+                    <td>{{ bookatable.time }}</td>
+                    <td>{{ bookatable.people }}</td>
+    
+                    <td class="text-center">
+                        <a href="{% url 'update_bookatable' bookatable.id %}" class="btn btn-warning btn-sm">Update</a>
+                        <a href="{% url 'delete_bookatable' bookatable.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Book a table?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Get in touch List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Email</th>
+                    <th>Massege</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for getintouch in getintouches %}
+                <tr>
+                    <td>{{ getintouch.id }}</td>
+                    <td>{{ getintouch.name }}</td>
+                    <td>{{ getintouch.email }}</td>
+                    <td>{{ getintouch.message}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'update_getintouch' getintouch.id %}" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="{% url 'delete_getintouch' getintouch.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this get in touch?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Teacher List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Image</th>
+                    <th>Ma'lumoti</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for teacher in teachers %}
+                <tr>
+                    <td>{{ teacher.id }}</td>
+                    <td>{{ teacher.name }}</td>
+                    <td>{{ teacher.image }}</td>
+                    <td>{{ teacher.malumoti}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'update_teacher' teacher.id %}" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="{% url 'delete_teacher' teacher.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this teacher?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Details List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Date</th>
+                    <th class="text-center">Teacher</th>
+                    <th>Language</th>
+                    <th>Location</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for details in detailes %}
+                <tr>
+                    <td>{{ details.id }}</td>
+                    <td>{{ details.date }}</td>
+                    <td>{{ details.teacher }}</td>
+                    <td>{{ details.language}}</td>
+                    <td>{{ details.location}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'update_details' details.id %}" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="{% url 'delete_details' details.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this teacher?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Reserve Your Spot Details Menu Teacher List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Details</th>
+                    <th>Category</th>
+                    <th>Teacher</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rs in rses %}
+                <tr>
+                    <td>{{ rs.id }}</td>
+                    <td>{{ rs.name }}</td>
+                    <td>{{ rs.details }}</td>
+                    <td>{{ rs.category_id}}</td>
+                    <td>{{ rs.teacher}}</td>
+                    <td class="text-center">
+                        <a href="#" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="#" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this reserveyourspotdetailsmenutecher?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+   
+    <div class="container mt-5">
+        <h1 class="mb-4">Give a gift List</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Image</th>
+                    <th>Price</th>
+                    <th>Text</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for giveagift in giveagiftes %}
+                <tr>
+                    <td>{{ giveagift.id }}</td>
+                    <td>{{ giveagift.name }}</td>
+                    <td>{{ giveagift.image }}</td>
+                    <td>{{ giveagift.price}}</td>
+                    <td>{{ giveagift.text}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'update_giveagift' giveagift.id %}" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="{% url 'delete_giveagift' giveagift.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this giveagife?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+    
+    <div class="container mt-5">
+        <h1 class="mb-4">Lats News list</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Image</th>
+                    <th>Text</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for latestnews in latestnewses %}
+                <tr>
+                    <td>{{ latestnews.id }}</td>
+                    <td>{{ latestnews.name }}</td>
+                    <td>{{ latestnews.image }}</td>
+                    <td>{{ latestnews.text}}</td>
+                    <td>{{ latestnews.date}}</td>
+                    <td class="text-center">
+                        <a href="{% url 'update_latestnews' latestnews.id %}" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="{% url 'delete_latestnews' latestnews.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this giveagife?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+
+    <div class="container mt-5">
+        <h1 class="mb-4">New restuarant list</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th class="text-center">Image</th>
+                    <th>Text</th>
+                    
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for newrestuarant in newrestuarantes %}
+                <tr>
+                    <td>{{ newrestuarant.id }}</td>
+                    <td>{{ newrestuarant.name }}</td>
+                    <td>{{ newrestuarant.image }}</td>
+                    <td>{{ newrestuarant.text}}</td>
+                   
+                    <td class="text-center">
+                        <a href="{% url 'update_newrestuarant' newrestuarant.id %}" class="btn btn-warning btn-sm">Update</a> <br>
+                        <a href="{% url 'delete_newrestuarant' newrestuarant.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this newrestuarant?');">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table> <br>
+        
+    </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
